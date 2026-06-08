@@ -1,0 +1,3 @@
+# APKs are published as Release assets, never committed to git.
+*.apk
+.DS_Store
