@@ -1,0 +1,23 @@
+# And My House — beta (prebuilt image, self-host)
+# Pulls the private GHCR image — `docker login ghcr.io` with a read:packages PAT
+# first. See README.md in this folder, or https://andmyhouse.app/beta.
+services:
+  andmyhouse:
+    image: ghcr.io/nathanrcast/andmyhouse:beta
+    container_name: andmyhouse
+    restart: unless-stopped
+    pull_policy: always              # `up -d` re-checks for a newer :beta
+    ports:
+      - "8500:8000"                  # change the left side if 8500 is taken
+    volumes:
+      - andmyhouse_data:/data        # SQLite + uploads + encryption salt; survives updates
+    environment:
+      - ANDMYHOUSE_SECRET_KEY=${ANDMYHOUSE_SECRET_KEY:?set ANDMYHOUSE_SECRET_KEY in .env}
+      - ANDMYHOUSE_TZ=${ANDMYHOUSE_TZ:-UTC}
+      - ANDMYHOUSE_BASE_URL=${ANDMYHOUSE_BASE_URL:-}
+      - ANDMYHOUSE_ALLOW_SETUP_RESET=${ANDMYHOUSE_ALLOW_SETUP_RESET:-0}
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  andmyhouse_data:

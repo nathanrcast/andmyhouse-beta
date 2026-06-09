@@ -1,13 +1,18 @@
 # andmyhouse-beta
 
-Public **release host** for the And My House Android beta. This repo holds **no
-source** — only the signed APK, attached to GitHub Releases, so beta testers can
-download it without a GitHub account or access to the private app repo.
+Public **release host** for the And My House beta. This repo holds **no source** —
+just the tester-facing artifacts, so beta testers don't need access to the private
+app repo.
 
-- Tester-facing page: **https://andmyhouse.app/beta**
-- Stable download link (always the newest beta):
-  `https://github.com/nathanrcast/andmyhouse-beta/releases/latest/download/andmyhouse.apk`
+Two ways to test:
 
-The app itself lives in the private `andmyhouse` repo. Cutting a new beta
-(version bump → build → publish here) is documented in that repo at
-`docs/beta-release.md`.
+- **Android (APK)** — signed APK on GitHub Releases. No GitHub account needed.
+  - Stable download: `https://github.com/nathanrcast/andmyhouse-beta/releases/latest/download/andmyhouse.apk`
+- **Docker (self-host the server)** — for technical testers. Compose + env + setup in
+  [`docker/`](docker/). The image (`ghcr.io/nathanrcast/andmyhouse:beta`) is **private**
+  during beta, so this path needs a GitHub account and a one-time access grant.
+
+Tester-facing page for both: **https://andmyhouse.app/beta**
+
+The app itself lives in the private `andmyhouse` repo. Cutting a new beta is
+documented there: `docs/beta-release.md` (Android) and `docs/docker-beta.md` (Docker).
